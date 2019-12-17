@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:400,700&display=swap')
+$blur-radius: .002vw
+$spread-radius: .002vw
+*
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+body
+  background-color: #000000
+  width: 100vw
+  // min-height: 300vh
+.model
+  position: absolute
+  top: 0
+  left: 0
+  width: 100vw
+  min-height: 300vh
+  overflow: hidden
+.inside
+  position: absolute
+  width: 50vw
+  height: 50vw
+  border: solid 4px #0ff
+  box-shadow: inset 0 0 $blur-radius $spread-radius #0ff, 0 0 $blur-radius $spread-radius #0ff
+  animation: cycle-color-changer 24s infinite
+.square
+  top: 33.5vh
+  left: 54%
+  transform: rotate(30deg)
+.circle
+  left: -20.5%
+  top: 82vh
+  border-radius: 50%
+  animation-delay: 8s
+header
+  height: 10vh
+  width: 80vw
+  margin: 5vh auto
+  display: flex
+  align-items: center
+  justify-content: flex-end
+  .logo
+    position: absolute
+    top: 5vh
+    left: 10vw
+    transform: rotate(30deg)
+    cursor: pointer
+    svg
+      position: absolute
+      width: 64px
+      height: 75px
+    svg:nth-child(8)
+      transform: scale(-1, 1) translateX(-17px)
+    svg:nth-child(5)
+      transform: scale(-1, 1) translateX(-18px)
+    svg:nth-child(2)
+      transform: scale(-1, 1) translateX(-16px)
+    svg:nth-child(9)
+      transform: rotate(-15deg) translateX(3px) translateY(19px)
+    svg:nth-child(6)
+      transform: rotate(-15deg) translateX(3px) translateY(21px)
+    svg:nth-child(3)
+      transform: rotate(-15deg) translateX(3px) translateY(17px)
+    svg:nth-child(1)
+      transform: translateX(-1px)
+    svg:nth-child(4)
+      transform: translateX(1px)
+    svg:nth-child(7)
+      transform: translateX(0px)
+  nav
+    color: #fff
+    height: 100%
+    display: flex
+    align-items: center
+    width: 30%
+    ul
+      width: 100%
+      display: flex
+      justify-content: space-between
+      li
+        list-style-type: none
+        font-family: 'Ubuntu', sans-serif
+        cursor: pointer
+
+    
+
+
+
+@keyframes cycle-color-changer
+  33%
+    border: solid 4px #f0f
+    box-shadow: inset 0 0 $blur-radius $spread-radius #f0f, 0 0 $blur-radius $spread-radius #f0f
+  66%
+    border: solid 4px #f00
+    box-shadow: inset 0 0 $blur-radius $spread-radius #f00, 0 0 $blur-radius $spread-radius #f00
+
+@media (max-width: 991px)
+  header
+    height: 20vh
+  // svg
+  //   width: 64px !important
+  //   height: 75px !important
+  // svg:nth-child(8)
+  //   transform: scale(-1, 1) translateX(-17px) !important
+  // svg:nth-child(5)
+  //   transform: scale(-1, 1) translateX(-18px) !important
+  // svg:nth-child(2)
+  //   transform: scale(-1, 1) translateX(-16px) !important
+  // svg:nth-child(9)
+  //   transform: rotate(-15deg) translateX(3px) translateY(19px) !important
+  // svg:nth-child(6)
+  //   transform: rotate(-15deg) translateX(3px) translateY(21px) !important
+  // svg:nth-child(3)
+  //   transform: rotate(-15deg) translateX(3px) translateY(17px) !important
+  // svg:nth-child(1)
+  //   transform: translateX(-1px) !important
+  // svg:nth-child(4)
+  //   transform: translateX(1px) !important
+  // svg:nth-child(7)
+  //   transform: translateX(0px)
+  .inside
+    width: 100vw
+    height: 100vw
+  .square
+    top: 11.7vh
+    left: 72.5%
+  .circle
+    top: 77.31vh
+    left: -68.35%
