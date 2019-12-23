@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu:400,700&display=swap')
 $blur-radius: .002vw
 $spread-radius: .002vw
+$font: 'Ubuntu', sans-serif
 *
   margin: 0
   padding: 0
@@ -8,7 +9,13 @@ $spread-radius: .002vw
 body
   background-color: #000000
   width: 100vw
-  // min-height: 300vh
+a
+  text-decoration: none
+  color: #fff
+html
+  font-size: 1vw
+::-webkit-scrollbar
+  width: 0
 .model
   position: absolute
   top: 0
@@ -16,6 +23,7 @@ body
   width: 100vw
   min-height: 300vh
   overflow: hidden
+  z-index: -1 // without z-index this element is above others non "absoluted" elements
 .inside
   position: absolute
   width: 50vw
@@ -32,6 +40,32 @@ body
   top: 82vh
   border-radius: 50%
   animation-delay: 8s
+
+.scroller
+  position: fixed
+  top: 50%
+  transform: translateY(-50%)
+  right: 2vw
+  height: 14.5833333334vw
+  width: 0.4166666667vw
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  .click-area
+    width: 100%
+    height: 4.1666666667vw
+    display: flex
+    justify-content: center
+    align-items: center
+    .wh-scroll-pointer
+      height: 100%
+      width: 50%
+      background-color: #fff
+
+section
+  display: flex
+  flex-direction: column
+  height: 100vh
 header
   height: 10vh
   width: 80vw
@@ -43,48 +77,189 @@ header
     position: absolute
     top: 5vh
     left: 10vw
-    transform: rotate(30deg)
     cursor: pointer
+    min-height: 18.5645833vw
+    min-width: 7.8125vw
+    animation: centreater 16s infinite
     svg
+      height: 7.8125vw
       position: absolute
-      width: 64px
-      height: 75px
-    svg:nth-child(8)
-      transform: scale(-1, 1) translateX(-17px)
-    svg:nth-child(5)
-      transform: scale(-1, 1) translateX(-18px)
-    svg:nth-child(2)
-      transform: scale(-1, 1) translateX(-16px)
-    svg:nth-child(9)
-      transform: rotate(-15deg) translateX(3px) translateY(19px)
-    svg:nth-child(6)
-      transform: rotate(-15deg) translateX(3px) translateY(21px)
-    svg:nth-child(3)
-      transform: rotate(-15deg) translateX(3px) translateY(17px)
-    svg:nth-child(1)
-      transform: translateX(-1px)
-    svg:nth-child(4)
-      transform: translateX(1px)
-    svg:nth-child(7)
-      transform: translateX(0px)
+      transform-origin: 0 0 0
+    svg:nth-child(3n+1)
+      transform: rotate(30deg)
+    svg:nth-child(3n+2)
+      transform: rotate(15deg) translate3d(-20%,20%,0)
+      // animation: foot-appear 16s infinite
+      display: none
+    svg:nth-child(3n) 
+      transform: scale(-1, 1)
+    svg:nth-child(3) 
+      animation: rd-lightning 16s infinite
+    svg:nth-child(6) 
+      animation: bl-lightning 16s infinite
+    svg:nth-child(9) 
+      animation: wh-lightning 16s infinite
+    .bl 
+      left: 0.16741071vw
+      animation: bl-glow-controller 16s infinite
+    .rd 
+      left: -0.16741071vw
+      animation: rd-glow-controller 16s infinite
   nav
     color: #fff
     height: 100%
     display: flex
     align-items: center
-    width: 30%
+    width: 30vw
     ul
       width: 100%
       display: flex
       justify-content: space-between
+      height: 100%
+      display: flex
+      align-items: center
       li
         list-style-type: none
-        font-family: 'Ubuntu', sans-serif
-        cursor: pointer
+        font-family: $font
+        font-size: 1.25rem
+        transition: .2s border, padding
+      li:hover
+        border-bottom: #fff solid 0.2vw
+        padding: 0 0 .2vw
 
-    
+.offer
+  position: absolute
+  top: 50%
+  transform: translateY(-50%)
+  width: 100%
+  display: flex
+  flex-direction: column 
+  color: #fff
+  .svg-wrapper
+    height: 15.625vw
+    width: 84.7916667vw
+    .alakazam-wrapper
+      position: absolute
+      height: 15.625vw
+      width: 100%
+      display: flex
+      justify-content: center
+      align-items: center
+      svg
+        height: 15.625vw
+        width: 84.7916667vw
+        position: absolute
+      .wh-kazam
+        fill: transparent
+        animation: fillin .3s ease forwards 3.5s
+      .rd-kazam, .bl-kazam
+        opacity: 0
+      .rd-kazam
+        animation: show-red .5s ease-in-out forwards 3.8s
+      .bl-kazam
+        animation: show-blue .5s ease-in-out forwards 3.8s
+      .wh-kazam path:nth-child(1)
+        stroke-dasharray: 1278.7528076171875
+        stroke-dashoffset: 1278.7528076171875
+        animation: a-usual-appear 1s ease forwards
+      .wh-kazam path:nth-child(2)
+        stroke-dasharray: 829.9999389648438
+        stroke-dashoffset: 829.9999389648438
+        animation: appear 1s ease forwards .2s
+      .wh-kazam path:nth-child(3)
+        stroke-dasharray: 1278.7528076171875
+        stroke-dashoffset: 1278.7528076171875
+        animation: a-usual-appear 1s ease forwards .4s
+      .wh-kazam path:nth-child(4)
+        stroke-dasharray: 1337.063232421875
+        stroke-dashoffset: 1337.063232421875
+        animation: k-appear 1s ease forwards 1s
+      .wh-kazam path:nth-child(5)
+        stroke-dasharray: 1278.7528076171875
+        stroke-dashoffset: 1278.7528076171875
+        animation: a-usual-appear 1s ease forwards 1s
+      .wh-kazam path:nth-child(6)
+        stroke-dasharray: 1059.3604736328125
+        stroke-dashoffset: 1059.3604736328125
+        animation: z-appear 1.5s ease forwards 2s
+      .wh-kazam path:nth-child(7)
+        stroke-dasharray: 1278.7528076171875
+        stroke-dashoffset: 1278.7528076171875
+        animation: a-appear 1.5s ease forwards 2s
+      .wh-kazam path:nth-child(8)
+        stroke-dasharray: 2190.4130859375
+        stroke-dashoffset: 2190.4130859375
+        animation: m-appear 1.5s ease forwards 2s
+  h1, h2
+    font-family: $font
+    font-weight: 400
+    margin: 1vw 0
+    width: 100%
+    padding: 0 12vw
+  h2
+    text-align: right
 
-
+@keyframes appear
+  to
+    stroke-dashoffset: 0
+@keyframes a-usual-appear
+  99%
+    stroke-dasharray: 1278.7528076171875
+    stroke-dashoffset: 0
+  100%
+    stroke-dasharray: 0
+    stroke-dashoffset: 0
+@keyframes k-appear
+  99%
+    stroke-dasharray: 1337.063232421875
+    stroke-dashoffset: 0
+  100%
+    stroke-dasharray: 0
+    stroke-dashoffset: 0
+@keyframes z-appear
+  80%
+    stroke-dashoffset: 300
+  100%
+    stroke-dashoffset: 0
+@keyframes a-appear
+  80%
+    stroke-dashoffset: 500
+  99%
+    stroke-dasharray: 1278.7528076171875
+    stroke-dashoffset: 0
+  100%
+    stroke-dasharray: 0
+    stroke-dashoffset: 0
+@keyframes m-appear
+  80%
+    stroke-dashoffset: 800
+  99%
+    stroke-dasharray: 2190.4130859375
+    stroke-dashoffset: 0
+  100%
+    stroke-dasharray: 0
+    stroke-dashoffset: 0
+@keyframes fillin
+  to
+    fill: white
+@keyframes show-red
+  0%
+    opacity: 1
+  50%
+    transform: translateX(-.5vw)
+  100%
+    opacity: 1
+    fill: #f0f
+    transform: translateX(-.25vw)
+@keyframes show-blue
+  0%
+    opacity: 1
+  50% 
+    transform: translateX(.5vw)
+  100%
+    opacity: 1
+    fill: #0ff
+    transform: translateX(.25vw)
 
 @keyframes cycle-color-changer
   33%
@@ -94,30 +269,110 @@ header
     border: solid 4px #f00
     box-shadow: inset 0 0 $blur-radius $spread-radius #f00, 0 0 $blur-radius $spread-radius #f00
 
+@keyframes foot-appear
+  25% 
+    opacity: 1
+  35% 
+    opacity: 0
+  95% 
+    opacity: 0
+  100% 
+    opacity: 1
+
+@keyframes centreater 
+  35% 
+    transform: translateY(0)
+  45% 
+    transform: translateY(17%)
+  85% 
+    transform: translateY(17%)
+
+@keyframes wh-lightning 
+  35% 
+    transform: scale(-1, 1)
+  45% 
+    transform: rotate(-150deg) translate3d(-180%,-40%,0)
+  85% 
+    transform: rotate(-150deg) translate3d(-180%,-40%,0)
+  95% 
+    transform: scale(-1, 1)
+  
+@keyframes rd-lightning
+  30%
+    left: -0.16741071vw
+  35% 
+    transform: scale(-1, 1)
+    left: 0
+  45%
+    transform: rotate(-150deg) translate3d(-180%,-40%,0)
+    left: 0
+  50%
+    left: -0.16741071vw
+  80% 
+    left: -0.16741071vw
+  85%
+    transform: rotate(-150deg) translate3d(-180%,-40%,0)
+    left: 0
+  95%
+    transform: scale(-1, 1)
+    left: 0
+@keyframes bl-lightning
+  30%
+    left: 0.16741071vw
+  35%
+    transform: scale(-1, 1)
+    left: 0
+  45%
+    transform: rotate(-150deg) translate3d(-180%,-40%,0)
+    left: 0
+  50%
+    left: 0.16741071vw
+  80%
+    left: 0.16741071vw
+  85%
+    transform: rotate(-150deg) translate3d(-180%,-40%,0)
+    left: 0
+  95%
+    transform: scale(-1, 1)
+    left: 0
+
+@keyframes rd-glow-controller
+  30%
+    left: -0.16741071vw
+  35%
+    left: 0
+  45%
+    left: 0
+  50%
+    left: -0.16741071vw
+  80%
+    left: -0.16741071vw
+  85%
+    left: 0
+  95%
+    left: 0
+  100%
+    left: -0.16741071vw
+
+@keyframes bl-glow-controller
+  30%
+    left: 0.16741071vw
+  35%
+    left: 0
+  45%
+    left: 0
+  50%
+    left: 0.16741071vw
+  80%
+    left: 0.16741071vw
+  85%
+    left: 0
+  95%
+    left: 0
+  100% 
+    left: 0.16741071vw
+
 @media (max-width: 991px)
-  header
-    height: 20vh
-  // svg
-  //   width: 64px !important
-  //   height: 75px !important
-  // svg:nth-child(8)
-  //   transform: scale(-1, 1) translateX(-17px) !important
-  // svg:nth-child(5)
-  //   transform: scale(-1, 1) translateX(-18px) !important
-  // svg:nth-child(2)
-  //   transform: scale(-1, 1) translateX(-16px) !important
-  // svg:nth-child(9)
-  //   transform: rotate(-15deg) translateX(3px) translateY(19px) !important
-  // svg:nth-child(6)
-  //   transform: rotate(-15deg) translateX(3px) translateY(21px) !important
-  // svg:nth-child(3)
-  //   transform: rotate(-15deg) translateX(3px) translateY(17px) !important
-  // svg:nth-child(1)
-  //   transform: translateX(-1px) !important
-  // svg:nth-child(4)
-  //   transform: translateX(1px) !important
-  // svg:nth-child(7)
-  //   transform: translateX(0px)
   .inside
     width: 100vw
     height: 100vw
