@@ -1,7 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu:400,700&display=swap')
+@import url('https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap')
 $blur-radius: .002vw
 $spread-radius: .002vw
 $font: 'Ubuntu', sans-serif
+$bebas: 'Bebas Neue', cursive
+$float-top-first-line: 32% // was 35%
+$float-top-second-line: 47% // was 50%
+$float-top-third-line: 62% // was 65%
+$float-top-first-line-snd: 34.5% // was 37.5%
+$float-top-second-line-snd: 49.5% // was 52.5%
+$float-top-third-line-snd: 64.5% // was 67.5%
+
 *
   margin: 0
   padding: 0
@@ -40,7 +49,17 @@ html
   top: 82vh
   border-radius: 50%
   animation-delay: 8s
-
+body section
+  position: absolute
+  left: 0
+  display: flex
+  flex-direction: column
+  height: 100vh
+  width: 100vw
+body section:nth-child(4)
+  top: 100vh
+body section:nth-child(5)
+  top: 200vh
 .scroller
   position: fixed
   top: 50%
@@ -61,11 +80,6 @@ html
       height: 100%
       width: 50%
       background-color: #fff
-
-section
-  display: flex
-  flex-direction: column
-  height: 100vh
 header
   height: 10vh
   width: 80vw
@@ -198,6 +212,193 @@ header
     padding: 0 12vw
   h2
     text-align: right
+
+.description
+  display: flex
+  padding: 2.5vw 0 0 8vw
+  height: 20vh
+  .face
+    width: 8vw
+    display: flex
+    justify-content: center
+    align-items: center
+    img
+      width: 8vw
+  .text-about
+    font-size: 1rem
+    font-family: $font
+    color: #ffffff
+    display: flex
+    flex-direction: column
+    justify-content: center
+    margin-left: 3vw
+.they-all-float
+  height: 60vh
+  a
+    display: flex
+    justify-content: center
+    align-items: center
+  a, img
+    position: absolute
+    max-height: 5vw
+  .itemOpacityMax
+    display: none
+  .item:hover .itemOpacityMax
+    display: flex
+  .stitch:hover .sndOpacityCh 
+    max-height: 2.4vw // could be display none, but it'd pause an animation
+  .fstOpacityCh
+    animation: lifecycle-opacity 9s infinite linear
+  .fst
+    animation: lifecycle-fst 9s infinite linear
+  .sndOpacityCh 
+    opacity: .1
+    animation: lifecycle-snd-opacity 9s infinite linear
+  .snd
+    transform: perspective(500px) translateZ(-3vw)
+    animation: lifecycle-snd 9s infinite linear
+  .SVG
+    top: $float-top-first-line
+    left: 27.5%
+  .html5
+    top: $float-top-first-line
+    left: 47.5%
+  .SPA
+    top: $float-top-first-line
+    left: 67.5%
+  .css
+    top: $float-top-second-line
+    left: 40%
+  .js
+    top: $float-top-second-line
+    left: 60%
+  .cssgrid
+    top: $float-top-third-line
+    left: 32.5%
+  .es6
+    top: $float-top-third-line
+    left: 52.5%
+  .babel
+    top: $float-top-third-line
+    left: 72.5%
+
+  .webpack
+    top: $float-top-first-line-snd
+    left: 32.5%
+  .animation
+    top: $float-top-first-line-snd
+    left: 52.5%
+  .git
+    top: $float-top-first-line-snd
+    left: 72.5%
+  .flexbox
+    top: $float-top-second-line-snd
+    left: 40%
+  .sass
+    top: $float-top-second-line-snd
+    left: 60%
+  .stitch
+    top: $float-top-third-line-snd
+    left: 27.5%
+  .canvas
+    top: $float-top-third-line-snd
+    left: 47.5%
+  .vue
+    top: $float-top-third-line-snd
+    left: 67.5%
+
+.made-with-css-wrapper
+  height: 20vh
+  .absoluter
+    position: absolute
+    height: 20vh
+    width: 100%
+    padding: 0 8vw
+    display: flex
+    justify-content: space-around
+    align-items: flex-end
+    color: #ffffff
+    overflow: hidden
+    div
+      display: flex
+      justify-content: center
+      align-items: center
+      text-transform: uppercase
+      font-family: $bebas
+      font-size: 8rem
+      transform: translateY(-100%)
+      height: 100%  
+    div:nth-child(1)
+      animation: fall-from-top .5s ease-out forwards
+    div:nth-child(2)
+      animation: fall-from-top .5s ease-out forwards 1s
+    div:nth-child(3)
+      animation: fall-from-top .25s ease-out forwards 2s
+    div:nth-child(4)
+      animation: this 2s ease-out forwards 2.25s
+    div:nth-child(5)
+      animation: hands 1.25s ease-out forwards 3s
+    .changeable-text
+      flex-direction: column
+      justify-content: space-around
+      height: 200%
+    .first-text
+      animation: hide 4s ease-out forwards
+    .css-text
+      transform: translateX(10%)
+
+@keyframes hide
+  99%
+    opacity: 1
+  100%
+    opacity: 0
+@keyframes this
+  12.5%
+    transform: translateY(0)
+  75%
+    transform: translateY(0)
+  87.5%
+    transform: translateY(-100%)
+  100%
+    transform: translateY(50%)
+@keyframes hands
+  40%
+    transform: translateY(0)
+  60%
+    transform: translateY(0)
+  80%
+    transform: translateY(-100%)
+  100%
+    transform: translateY(50%)
+@keyframes fall-from-top
+  to
+    transform: translateY(0)
+@keyframes lifecycle-fst
+  25%
+    transform: perspective(500px) translateX(6vw) translateY(3vw) translateZ(-2vw)
+  50%
+    transform: perspective(500px) translateZ(-3vw)
+  75%
+    transform: perspective(500px) translateX(-6vw) translateY(-3vw) translateZ(-2vw)
+@keyframes lifecycle-opacity
+  25%
+    opacity: .1
+  75%  
+    opacity: .1
+@keyframes lifecycle-snd
+  25%
+    transform: perspective(500px) translateX(-6vw) translateY(-3vw) translateZ(-2vw)
+  50%
+    transform: perspective(500px) translateX(0) translateY(0) translateZ(0)
+  75%
+    transform: perspective(500px) translateX(6vw) translateY(3vw) translateZ(-2vw)
+@keyframes lifecycle-snd-opacity
+  25%
+    opacity: .1
+  50%
+    opacity: 1
+  75%
+    opacity: .1
 
 @keyframes appear
   to
