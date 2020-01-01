@@ -353,6 +353,7 @@ header
   text-transform: uppercase
   font-family: $bebas
   font-size: 16rem
+  animation: hide-shazam-wrapper step-end forwards 2s
   p
     animation: move-shazam 2s linear forwards
 .works
@@ -385,33 +386,33 @@ header
   .websocket-chat
     // background-color: #ef88ef
     background: url(../assets/warp.png) no-repeat top center / cover
-    .float-wrapper
+    // .float-wrapper
+    //   position: absolute
+    //   height: (100vh / 3)
+    //   width: (100vw / 3)
+    display: flex
+    justify-content: center
+    align-items: center
+    svg
+      max-height: (100vh / 25)
       position: absolute
-      height: (100vh / 3)
-      width: (100vw / 3)
-      display: flex
-      justify-content: center
-      align-items: center
-      svg
-        max-height: 2vw
-        position: absolute
-        // top: 2vw
-        // left: 2vw
-        opacity: 0
-      // .chat
-      //   transform: translateX(80%)
-      .tt-websocket
-        animation: websocket-chat-fst 4s linear forwards infinite
-      .miami-chat
-        animation: websocket-chat-fst 4s linear forwards infinite 2s
-      .yl-websocket
-        animation: websocket-chat-second 4s linear forwards infinite
-      .pur-chat
-        animation: websocket-chat-second 4s linear forwards infinite 2s
-      .rd-websocket
-        animation: websocket-chat-last 4s linear forwards infinite
-      .acid-chat
-        animation: websocket-chat-last 4s linear forwards infinite 2s
+      opacity: 0
+    .websocket
+      max-width: (100vw / 6)
+    .chat
+      max-width: (100vw / 13.5)
+    .tt-websocket
+      animation: websocket-chat-fst 4s linear forwards infinite
+    .miami-chat
+      animation: websocket-chat-fst 4s linear forwards infinite 2s
+    .yl-websocket
+      animation: websocket-chat-second 4s linear forwards infinite
+    .pur-chat
+      animation: websocket-chat-second 4s linear forwards infinite 2s
+    .rd-websocket
+      animation: websocket-chat-last 4s linear forwards infinite
+    .acid-chat
+      animation: websocket-chat-last 4s linear forwards infinite 2s
   .filler3
     background-color: #00f
   .filler4
@@ -421,82 +422,52 @@ header
 @keyframes websocket-chat-fst
   0%
     opacity: 1
-    top: 2vw
-    left: 2vw
+    transform: translateY(-200%) translateX(-5vw)
   40%
     opacity: 1
-    top: 2vw
-    left: 2vw
+    transform: translateY(-200%) translateX(-5vw)
   50%
     opacity: 0
-    top: 2vw
-    left: 2vw
+    transform: translateY(-200%) translateX(-5vw)
   100%
     opacity: 0
-    top: 2vw
-    left: 2vw
+    transform: translateY(-200%) translateX(-5vw)
 @keyframes websocket-chat-second
   0%
     opacity: 1
-    // top: 2vw
-    // left: 2vw
-    transform: translateX(2vw) transalteY(2vw)
+    transform: translateY(-200%) translateX(-5vw)
   12.5%
     opacity: 1
-    // top: 2vw
-    // left: 2vw
+    transform: translateY(-200%) translateX(-5vw)
   25%
-    // top: 8vw
-    // left: 8vw
+    transform: translateY(0) translateX(0)
   40%
-    // top: 8vw
-    // left: 8vw
     opacity: 1
+    transform: translateY(0) translateX(0)
   50%
-    // top: 8vw
-    // left: 8vw
     opacity: 0
+    transform: translateY(0) translateX(0)
   100%
     opacity: 0
 @keyframes websocket-chat-last
   0%
     opacity: 1
-    // top: 2vw
-    // left: 2vw
-    transform: translateX(2vw) transalteY(2vw)
+    transform: translateY(-200%) translateX(-5vw)
   12.5%
     opacity: 1
-    // top: 2vw
-    // left: 2vw
-    transform: translateX(2vw) transalteY(2vw)
+    transform: translateY(-200%) translateX(-5vw)
   25%
-    // top: 8vw
-    // left: 8vw
+    transform: translateY(0) translateX(0)
   37.5%
-    // top: 14vw
-    // left: 14vw
-    bottom: 2vw
-    right: 2vw
+    transform: translateY(200%) translateX(5vw)
   40%
-    // top: 14vw
-    // left: 14vw
-    bottom: 2vw
-    right: 2vw
     opacity: 1
+    transform: translateY(200%) translateX(5vw)
   50%
-    // top: 14vw
-    // left: 14vw
-    bottom: 2vw
-    right: 2vw
     opacity: 0
+    transform: translateY(200%) translateX(5vw)
   100%
     opacity: 0
-@keyframes show-works
-  to
-    height: 100%
-    width: 100%
-    transform: translateX(0) translateY(0)
-    opacity: 1
 
 @keyframes move-shazam
   0%
@@ -510,6 +481,10 @@ header
     opacity: 0
   100%
     opacity: 0
+@keyframes hide-shazam-wrapper
+  100%
+    top: 0
+    left: 0
 
 @keyframes hide
   99%
