@@ -10,6 +10,8 @@ $float-top-third-line: 62% // was 65%
 $float-top-first-line-snd: 34.5% // was 37.5%
 $float-top-second-line-snd: 49.5% // was 52.5%
 $float-top-third-line-snd: 64.5% // was 67.5%
+$socket-chat-range: 34%
+$socket-chat-range-vertical: 200%
 
 *
   margin: 0
@@ -50,16 +52,16 @@ html
   border-radius: 50%
   animation-delay: 8s
 body section
-  position: absolute
+  // position: absolute
   left: 0
   display: flex
   flex-direction: column
-  height: 100vh
+  min-height: 100vh
   width: 100vw
-body section:nth-child(4)
-  top: 100vh
-body section:nth-child(5)
-  top: 200vh
+// body section:nth-child(4) // browser-sync inserts it's script tags in start of the body tags, so i'll have to change numbers before load
+//   top: 100vh
+// body section:nth-child(5) // browser-sync inserts it's script tags in start of the body tags, so i'll have to change numbers before load
+//   top: 200vh
 .scroller
   position: fixed
   z-index: 1
@@ -82,11 +84,11 @@ body section:nth-child(5)
       width: 50%
       background-color: #fff
 header
-  height: 10vh
-  width: 80vw
-  margin: 5vh auto
+  height: 12vh
+  width: 90vw
+  margin: 0 auto
   display: flex
-  align-items: center
+  align-items: flex-end
   justify-content: flex-end
   .logo
     position: absolute
@@ -122,13 +124,36 @@ header
       animation: rd-glow-controller 16s infinite
   nav
     color: #fff
-    height: 100%
+    height: 5vh
     display: flex
     align-items: center
     width: 30vw
-    ul
+    .burger-label, .burger-stick
+      position: absolute
+      top: 5vh
+      right: 6.7vw
+      width: 6vw
+      height: 6vw
+      cursor: pointer
+      display: none
+    .burger-label
+      z-index: 2
+      opacity: 0
+    .burger-stick
+      transition: all .5s
+      z-index: 1
+    .stick-wh-top
+      background: linear-gradient(to bottom, transparent 29%, #ffffff 30%, #ffffff 35%, transparent 36%)
+    .stick-wh-bottom
+      background: linear-gradient(to top, transparent 29%, #ffffff 30%, #ffffff 35%, transparent 36%)
+    #burger-menu
+      display: none
+    #burger-menu:checked ~ .stick-wh-top
+      transform: rotate(135deg) translateY(15%)
+    #burger-menu:checked ~ .stick-wh-bottom
+      transform: rotate(-135deg) translateY(-15%)
+    .navigation
       width: 100%
-      display: flex
       justify-content: space-between
       height: 100%
       display: flex
@@ -213,6 +238,8 @@ header
     padding: 0 12vw
   h2
     text-align: right
+  .alakazam-mobile
+    display: none
 
 .description
   display: flex
@@ -235,6 +262,7 @@ header
     margin-left: 3vw
 .they-all-float
   height: 60vh
+  display: none // temporary
   a
     display: flex
     justify-content: center
@@ -358,38 +386,24 @@ header
     animation: move-shazam 2s linear forwards
 .works
   width: 100%
-  height: 100%
   display: grid
   grid-template-columns: repeat(3, 1fr)
-  // div 
-  //   height: (100vh / 3)
-  //   width: (100vw / 3)
-  //   overflow: hidden
+  div
+    height: (100vh / 3)
   .erarta
-    // background-color: #f86420
     background: url(../assets/err.png) no-repeat center / cover
   .movie-db
-    // background-color: #f00
     background: url(../assets/moviedb.png) no-repeat center / cover
   .snake
-    // background-color: #ca1697
     background: url(../assets/snake.png) no-repeat center / cover
   .monty-hall
-    // background-color: #fecb2f
     background: url(../assets/doors2.png) no-repeat center / cover
   .lthr
-    // background-color: #ff0
     background: url(../assets/lthr2.png) no-repeat center / cover
   .calc
-    // background-color: #6bcc25
     background: url(../assets/calc.jpg) no-repeat center / cover
   .websocket-chat
-    // background-color: #ef88ef
     background: url(../assets/warp.png) no-repeat top center / cover
-    // .float-wrapper
-    //   position: absolute
-    //   height: (100vh / 3)
-    //   width: (100vw / 3)
     display: flex
     justify-content: center
     align-items: center
@@ -417,28 +431,149 @@ header
     background-color: #00f
   .filler4
     background-color: #0b650f
-  
+
+@media (max-width: 1279px)
+  section .works
+    grid-template-columns: repeat(2, 1fr)
+  .filler3
+    display: none
+  .websocket
+    max-width: (100vw / 4)
+  .chat
+    max-width: (100vw / 9)
+
+@media (max-width: 991px)
+  .mobile-hidden
+    display: none
+  .scroller
+    display: none
+  .inside
+    width: 100vw
+    height: 100vw
+  .square
+    top: 11.7vh
+    left: 72.5%
+  .circle
+    top: 77.31vh
+    left: -68.35%
+  header, header nav, .hidden-nav, .navigation li, .navigation
+    transition: all .5s !important
+  header
+    height: auto
+    margin-bottom: 10vh
+    nav
+      height: auto
+      width: 100%
+      align-items: flex-start
+      #burger-menu:checked ~ .hidden-nav
+        height: auto !important
+        justify-content: flex-start
+        li
+          opacity: 1 !important
+          font-size: 6rem
+          margin: 8vw 0
+        li:nth-child(1)
+          margin: calc(8vw + 5vh) 0 8vw 0
+        li:nth-child(3)
+          margin: 8vw 0 0 0
+      .navigation
+        display: block
+        width: 100vw
+        height: auto
+        margin-top: calc(5vh + 6vw)
+        li
+          text-align: center
+          width: 100%
+          opacity: 0
+        li:hover
+          border: none
+          padding: 0
+  header nav .burger-label, header nav .burger-stick
+    display: flex
+  .offer
+    position: static
+    transform: translateY(0)
+    margin: 0 0 10vh 0
+    .svg-wrapper
+      display: none
+    h1, h2
+      display: none
+    .alakazam-mobile
+      display: flex
+      width: 100vw
+      padding: 0 0 0 10vw
+      svg 
+        height: calc(70vh - 6vw)
+  .description
+    flex-direction: column
+    padding: 0
+    height: auto
+    .face
+      margin: 0 auto 5vh
+      width: 30vw
+      img
+        width: 30vw
+    .text-about
+      p
+        font-size: 3.75rem
+      .counter-wrapper
+        margin-bottom: 5vh
+
+  section .works
+    grid-template-columns: repeat(1, 1fr)
+    div
+      height: 50vh
+  .websocket-chat svg
+    max-height: (100vh / 15) !important
+  .websocket
+    max-width: (100vw / 2) !important
+  .chat
+    max-width: (100vw / 4.5) !important
+@media (max-width: 800px)
+  header
+    .logo
+      left: 15vw
+      svg
+        min-height: 7.8125vw * 2
+      svg:nth-child(3) 
+        animation: rd-lightning-mobile 16s infinite
+      svg:nth-child(6) 
+        animation: bl-lightning-mobile 16s infinite
+      .bl 
+        left: 0.16741071vw * 2
+        animation: bl-glow-controller-mobile 16s infinite
+      .rd 
+        left: -0.16741071vw * 2
+        animation: rd-glow-controller-mobile 16s infinite
+    nav
+      .burger-label, .burger-stick
+        width: 12vw
+        height: 12vw
+@media (max-width: 600px)
+  section .works div
+      height: (100vh / 3)
+
 
 @keyframes websocket-chat-fst
   0%
     opacity: 1
-    transform: translateY(-200%) translateX(-5vw)
+    transform: translateY(-$socket-chat-range-vertical) translateX(-$socket-chat-range)
   40%
     opacity: 1
-    transform: translateY(-200%) translateX(-5vw)
+    transform: translateY(-$socket-chat-range-vertical) translateX(-$socket-chat-range)
   50%
     opacity: 0
-    transform: translateY(-200%) translateX(-5vw)
+    transform: translateY(-$socket-chat-range-vertical) translateX(-$socket-chat-range)
   100%
     opacity: 0
-    transform: translateY(-200%) translateX(-5vw)
+    transform: translateY(-$socket-chat-range-vertical) translateX(-$socket-chat-range)
 @keyframes websocket-chat-second
   0%
     opacity: 1
-    transform: translateY(-200%) translateX(-5vw)
+    transform: translateY(-$socket-chat-range-vertical) translateX(-$socket-chat-range)
   12.5%
     opacity: 1
-    transform: translateY(-200%) translateX(-5vw)
+    transform: translateY(-$socket-chat-range-vertical) translateX(-$socket-chat-range)
   25%
     transform: translateY(0) translateX(0)
   40%
@@ -452,20 +587,20 @@ header
 @keyframes websocket-chat-last
   0%
     opacity: 1
-    transform: translateY(-200%) translateX(-5vw)
+    transform: translateY(-$socket-chat-range-vertical) translateX(-$socket-chat-range)
   12.5%
     opacity: 1
-    transform: translateY(-200%) translateX(-5vw)
+    transform: translateY(-$socket-chat-range-vertical) translateX(-$socket-chat-range)
   25%
     transform: translateY(0) translateX(0)
   37.5%
-    transform: translateY(200%) translateX(5vw)
+    transform: translateY($socket-chat-range-vertical) translateX($socket-chat-range)
   40%
     opacity: 1
-    transform: translateY(200%) translateX(5vw)
+    transform: translateY($socket-chat-range-vertical) translateX($socket-chat-range)
   50%
     opacity: 0
-    transform: translateY(200%) translateX(5vw)
+    transform: translateY($socket-chat-range-vertical) translateX($socket-chat-range)
   100%
     opacity: 0
 
@@ -712,13 +847,79 @@ header
   100% 
     left: 0.16741071vw
 
-@media (max-width: 991px)
-  .inside
-    width: 100vw
-    height: 100vw
-  .square
-    top: 11.7vh
-    left: 72.5%
-  .circle
-    top: 77.31vh
-    left: -68.35%
+/* mobile only animations */
+  
+@keyframes rd-lightning-mobile
+  30%
+    left: -0.16741071vw * 2
+  35% 
+    transform: scale(-1, 1)
+    left: 0
+  45%
+    transform: rotate(-150deg) translate3d(-180%,-40%,0)
+    left: 0
+  50%
+    left: -0.16741071vw * 2
+  80% 
+    left: -0.16741071vw * 2
+  85%
+    transform: rotate(-150deg) translate3d(-180%,-40%,0)
+    left: 0
+  95%
+    transform: scale(-1, 1)
+    left: 0
+@keyframes bl-lightning-mobile
+  30%
+    left: 0.16741071vw * 2.2
+  35%
+    transform: scale(-1, 1)
+    left: 0
+  45%
+    transform: rotate(-150deg) translate3d(-180%,-40%,0)
+    left: 0
+  50%
+    left: 0.16741071vw * 2.2
+  80%
+    left: 0.16741071vw * 2.2
+  85%
+    transform: rotate(-150deg) translate3d(-180%,-40%,0)
+    left: 0
+  95%
+    transform: scale(-1, 1)
+    left: 0
+
+@keyframes rd-glow-controller-mobile
+  30%
+    left: -0.16741071vw * 2
+  35%
+    left: 0
+  45%
+    left: 0
+  50%
+    left: -0.16741071vw * 2
+  80%
+    left: -0.16741071vw * 2
+  85%
+    left: 0
+  95%
+    left: 0
+  100%
+    left: -0.16741071vw * 2
+
+@keyframes bl-glow-controller-mobile
+  30%
+    left: 0.16741071vw * 2.2
+  35%
+    left: 0
+  45%
+    left: 0
+  50%
+    left: 0.16741071vw * 2.2
+  80%
+    left: 0.16741071vw * 2.2
+  85%
+    left: 0
+  95%
+    left: 0
+  100% 
+    left: 0.16741071vw * 2.2
