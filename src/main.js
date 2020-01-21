@@ -3,6 +3,7 @@ const init = () => {
   let down;
   let isISISon = false;
   let touchStart = 0;
+  const experienceStart = 1552435199;
   const sections = document.querySelectorAll('section');
   const shapes = document.querySelector('.model');
   const isisNavToSelf = document.querySelector('.isisNavToSelf');
@@ -12,6 +13,59 @@ const init = () => {
   const scrollerToPortfolio = document.querySelector('.scroller-to-portfolio');
   const bluePositionNotifier = document.querySelectorAll('.bl-scroll-pointer');
   const redPositionNotifier = document.querySelectorAll('.rd-scroll-pointer');
+  const counter = document.querySelector('.counter');
+
+  const cases = {
+    0: ['год','года','лет'],
+    1: ['месяц','месяца','месяцев'],
+    2: ['день','дня','дней'],
+    3: ['час','часа','часов'],
+    4: ['минута','минуты','минут'],
+    5: ['секунда','секунды','секунд']
+  }
+
+  // should've put it to an external file
+  const countStamp = () => Math.floor(Date.now() / 1000) - experienceStart;
+  const figuresChecker = (el, last, teen, i) => {
+    if (teen || +last === 0 || +last >= 5 && +last <= 9) {
+      return ` ${el} ${cases[i][2]}`;
+    } else if (+last >= 2 && +last <= 4) {
+      return ` ${el} ${cases[i][1]}`;
+    } else {
+      return ` ${el} ${cases[i][0]}`;
+    }
+  }
+  const padezh = (arr) => {
+    let term = '';
+    for (let i = 0; i < arr.length; i++) {
+      let mt = arr[i] === 0;
+      // making it string
+      arr[i] = String(arr[i]);
+
+      // creating chekers if it's teen
+      let teen = arr[i].length === 2 && arr[i][0] === '1';
+      
+      if (!mt) term += figuresChecker(arr[i], arr[i].slice(-1), teen, i);
+    }
+    return term;
+  }
+  const countToHumanFormat = () => {
+    let inYear = 31536000;
+    let inMonth = 2628000;
+    let inDay = 86400;
+    let inHour = 3600;
+    let averageDaysInMonth = 30.416666666667
+    let years = Math.floor(countStamp() / inYear);
+    let months = Math.floor(countStamp() / inMonth) % 12;
+    let days = Math.floor((countStamp() / inDay) % averageDaysInMonth);
+    let hours = Math.floor(countStamp() / inHour) % 24;
+    let minutes = Math.floor(countStamp() / 60) % 60;
+    let seconds = countStamp() % 60;
+
+    return padezh([years, months, days, hours, minutes, seconds]);
+  }
+  counter.innerHTML = countStamp();
+  counter.title = countToHumanFormat();
 
   // making scroll smoothely
   const smoothScroll = (down) => {
@@ -32,6 +86,8 @@ const init = () => {
 
     bluePositionNotifier[scrollPosition].style.transform = `translateX(50%)`;
     redPositionNotifier[scrollPosition].style.transform = `translateX(-50%)`;
+
+    if (scrollPosition === 1) setTimeout(() => document.querySelector('.made-with-css-wrapper').style.display = `flex`, 1200);
   }
 
   // scroll after click
@@ -132,11 +188,16 @@ const init = () => {
     scrollerToPortfolio.addEventListener('click', scrToPortfolio);
 
     isISISon = true;
+
+    setTimeout(() => scrollTo(0, 0), 400);
   }
   window.addEventListener('resize', resizeControl);
 
   bluePositionNotifier[scrollPosition].style.transform = `translateX(50%)`;
   redPositionNotifier[scrollPosition].style.transform = `translateX(-50%)`;
+
+  setInterval(() => counter.innerHTML = countStamp(), 1000);
+  setInterval(() => counter.title = countToHumanFormat(), 2000);
 }
 
 document.addEventListener('DOMContentLoaded', init);
