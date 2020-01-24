@@ -495,19 +495,15 @@ header
   grid-template-columns: repeat(3, 1fr)
   div
     height: (100vh / 3)
-    .img-wrapper
-      height: 100%
-      width: 100%
-      transition: height .5s
     .description-block
+      margin-top: (100vh / 3)
       width: 100%
-      transition: height .5s
-      height: auto
+      height: 20%
       display: flex
       justify-content: space-between
       align-items: center
-      height: 0
       overflow: hidden
+      transition: all .5s
       .used
         display: flex
         align-items: center
@@ -529,12 +525,9 @@ header
         img
           height: 100%
   div:hover
-    .img-wrapper
-      height: 80%
     .description-block
-      height: 20%
-  // .erarta-img
-  //   background: url(../assets/err.png) no-repeat center / cover
+      margin-top: ((100vh / 3) * .8)
+    
   .erarta
     background: url(../assets/err.png) no-repeat center / cover
   .movie-db
