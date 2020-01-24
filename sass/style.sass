@@ -30,8 +30,10 @@ html
   width: 0
 .model
   position: absolute
+  overflow: hidden
   top: 0
   left: 0
+  min-height: 150vh
   width: 100vw
   z-index: -1 // without z-index this element is above others non "absoluted" elements
   transition: transform 1.2s
@@ -316,7 +318,6 @@ header
   display: flex
 .item:hover .stitchOpacityCh
   height: 0
-  
 .tilter
   position: absolute
   transform: rotate(45deg)
@@ -474,27 +475,66 @@ header
   .first-text
     animation: hide 4s ease-out forwards
 
-.shazam-wrapper
-  position: absolute
-  z-index: 1
-  top: 50%
-  left: 50%
-  display: flex
-  color: #fff
-  text-transform: uppercase
-  font-family: $bebas
-  font-size: 16rem
-  animation: hide-shazam-wrapper step-end forwards 2s
-  p
-    animation: move-shazam 2s linear forwards
+// .shazam-wrapper
+//   position: absolute
+//   z-index: 1
+//   top: 50%
+//   left: 50%
+//   display: flex
+//   color: #fff
+//   text-transform: uppercase
+//   font-family: $bebas
+//   font-size: 16rem
+//   animation: hide-shazam-wrapper step-end forwards 2s
+//   p
+//     animation: move-shazam 2s linear forwards
 .works
-  overflow: auto
   height: 100vh
   width: 100%
   display: grid
   grid-template-columns: repeat(3, 1fr)
   div
     height: (100vh / 3)
+    .img-wrapper
+      height: 100%
+      width: 100%
+      transition: height .5s
+    .description-block
+      width: 100%
+      transition: height .5s
+      height: auto
+      display: flex
+      justify-content: space-between
+      align-items: center
+      height: 0
+      overflow: hidden
+      .used
+        display: flex
+        align-items: center
+      .used, .visit
+        height: 50%
+        padding: 0 1vw
+        p
+          color: #fff
+          font-size: 1rem
+          padding: .25vw .75vw
+          border: solid .1vw #fff
+          cursor: pointer
+        p:hover
+          background-color: #fff
+          color: #000
+          border: solid .1vw #fff
+        p, a
+          margin: 0 .5vw
+        img
+          height: 100%
+  div:hover
+    .img-wrapper
+      height: 80%
+    .description-block
+      height: 20%
+  // .erarta-img
+  //   background: url(../assets/err.png) no-repeat center / cover
   .erarta
     background: url(../assets/err.png) no-repeat center / cover
   .movie-db
@@ -512,6 +552,9 @@ header
     display: flex
     justify-content: center
     align-items: center
+    .svg-resolver
+      width: 100%
+      height: 100%
     svg
       max-height: (100vh / 25)
       position: absolute
@@ -540,7 +583,7 @@ header
 @media (max-width: 1279px)
   section .works
     grid-template-columns: repeat(2, 1fr)
-  .filler3
+  .filler3, .filler2, .monty-hall
     display: none
   .websocket
     max-width: (100vw / 4)
@@ -554,6 +597,8 @@ header
     display: none
   .scroller
     display: none
+  .model
+    height: 200vh
   .inside
     width: 100vw
     height: 100vw
