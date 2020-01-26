@@ -78,7 +78,6 @@ const init = () => {
 
     for (let i = 0; i < sections.length; i++) sections[i].style.transform = `translateY(-${scrollPosition * 100}vh)`;
     for (let i = 0; i < shapes.length; i++) shapes[i].style.transform = `translateY(-${scrollPosition * 100 / 2}vh) rotate(30deg)`;
-    // shapes.style.transform = `translateY(-${scrollPosition * 100 / 2}vh)`;
 
     for (let i = 0; i < bluePositionNotifier.length; i++) {
       bluePositionNotifier[i].style.transform = ``;
