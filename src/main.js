@@ -14,6 +14,7 @@ const init = () => {
   const bluePositionNotifier = document.querySelectorAll('.bl-scroll-pointer');
   const redPositionNotifier = document.querySelectorAll('.rd-scroll-pointer');
   const counter = document.querySelector('.counter');
+  const control = document.querySelectorAll('.control');
 
   const cases = {
     0: ['год','года','лет'],
@@ -24,7 +25,7 @@ const init = () => {
     5: ['секунда','секунды','секунд']
   }
 
-  // should've put it to an external file
+  // should've put it to an external file for experience count
   const countStamp = () => Math.floor(Date.now() / 1000) - experienceStart;
   const figuresChecker = (el, last, teen, i) => {
     if (teen || +last === 0 || +last >= 5 && +last <= 9) {
@@ -66,6 +67,16 @@ const init = () => {
   }
   counter.innerHTML = countStamp();
   counter.title = countToHumanFormat();
+  // end of experience count
+
+  // start of portfolio list changes
+  function switcher() {
+    let div = document.createElement('div');
+    div.className = 'colorer';
+    this.appendChild(div);
+    setTimeout(() => this.removeChild(div), 1000);
+  }
+  // end of portfolio list changes
 
   // making scroll smoothely
   const smoothScroll = (down) => {
@@ -193,6 +204,8 @@ const init = () => {
 
   setInterval(() => counter.innerHTML = countStamp(), 1000);
   setInterval(() => counter.title = countToHumanFormat(), 1500);
+
+  for (let i = 0; i < control.length; i++) control[i].addEventListener('click', switcher);
 }
 
 document.addEventListener('DOMContentLoaded', init);
