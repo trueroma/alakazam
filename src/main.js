@@ -3,6 +3,7 @@ const init = () => {
   let down;
   let isISISon = false;
   let touchStart = 0;
+  let eyeBeingTracked = false;
   const experienceStart = 1552435199;
   const sections = document.querySelectorAll('section');
   const shapes = document.querySelectorAll('.inside');
@@ -15,6 +16,7 @@ const init = () => {
   const redPositionNotifier = document.querySelectorAll('.rd-scroll-pointer');
   const counter = document.querySelector('.counter');
   const control = document.querySelectorAll('.control');
+  const hex = document.querySelectorAll('.hexagon');
 
   const cases = {
     0: ['год','года','лет'],
@@ -78,6 +80,29 @@ const init = () => {
   }
   // end of portfolio list changes
 
+  // start of eye tracking
+  const pupil = document.querySelector('.pupil');
+
+  function mouseTracker(e) {
+    let xMover = e.clientX - (window.innerWidth / 2);
+    let yMover = e.clientY - (window.innerHeight / 2);
+    
+    if (yMover > pupil.offsetWidth / 2) {
+      yMover = pupil.offsetWidth / 2;
+    } else if (yMover < -pupil.offsetWidth / 2) {
+      yMover = -pupil.offsetWidth / 2;
+    }
+    
+    if (xMover > pupil.offsetWidth) {
+      xMover = pupil.offsetWidth;
+    } else if (xMover < -pupil.offsetWidth) {
+      xMover = -pupil.offsetWidth;
+    }
+    
+    pupil.style.transform = `rotate(-45deg) translate(${xMover}px, ${yMover}px)`;
+  }
+  // end of eye tracking
+
   // making scroll smoothely
   const smoothScroll = (down) => {
     scrollTo(0, 0);
@@ -99,6 +124,12 @@ const init = () => {
     redPositionNotifier[scrollPosition].style.transform = `translateX(-50%)`;
 
     if (scrollPosition === 1) setTimeout(() => document.querySelector('.made-with-css-wrapper').style.display = `flex`, 1200);
+    if (scrollPosition === 2 && !eyeBeingTracked) {
+      for (let i = 0; i < hex.length; i++) hex[i].style.display = `flex`;
+      eyeBeingTracked = true;
+      setTimeout(() => document.body.addEventListener('mousemove', mouseTracker), 3000);
+    }
+    
   }
 
   // scroll after click
