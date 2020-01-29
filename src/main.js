@@ -127,9 +127,6 @@ const init = () => {
 
   // checks the size to control ISIS
   const resizeControl = () => {
-    let scrolled = window.pageYOffset;
-    console.log(scrolled);
-
     if (isISISon) {
       // absolute isis remove
       document.removeEventListener('wheel', isis);
@@ -166,7 +163,7 @@ const init = () => {
     } else {
       // getting rid of previous chages
       for (let i = 0; i < sections.length; i++) sections[i].style.transform = ``;
-      shapes.style.transform = ``;
+      for (let i = 0; i < shapes.length; i++) shapes[i].style.transform = ``;
 
       // apply suitable changes
       scrollTo(0, window.innerHeight * scrollPosition);
@@ -195,7 +192,7 @@ const init = () => {
   redPositionNotifier[scrollPosition].style.transform = `translateX(-50%)`;
 
   setInterval(() => counter.innerHTML = countStamp(), 1000);
-  setInterval(() => counter.title = countToHumanFormat(), 2000);
+  setInterval(() => counter.title = countToHumanFormat(), 1500);
 }
 
 document.addEventListener('DOMContentLoaded', init);
