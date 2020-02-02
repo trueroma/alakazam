@@ -532,7 +532,7 @@ header
   .erarta
     background: url(../assets/err.png) no-repeat center / cover
   .movie-db
-    background: url(../assets/moviedb.png) no-repeat center / cover
+    background: url(../assets/moviedbHex.png) no-repeat center / cover
   .snake
     background: url(../assets/snake.png) no-repeat center / cover
   .monty-hall
@@ -556,17 +556,10 @@ header
     width: 100%
     height: 100%
   svg
-    max-height: (100vh / 25)
     position: absolute
     opacity: 0
-  .websocket
-    width: 10vw
-    max-width: 17.7777777778vh
-    // max-width: (100vw / 6)
-  .chat
-    width: 100vw / 22.5
-    max-width: ((100vh / 22.5) * 1.77777777778)
-    // max-width: (100vw / 13.5)
+    height: 1vw
+    max-height: 1vh * 1.77777777778
   .tt-websocket
     animation: websocket-chat-fst 4s linear forwards infinite
   .miami-chat
@@ -580,7 +573,7 @@ header
   .acid-chat
     animation: websocket-chat-last 4s linear forwards infinite 2s
 .works-desk
-  padding: 5vw 0 0 5vw
+  padding: 10vh 0 0 5vw
   width: 95vw
   height: 100vh
   overflow: hidden
@@ -591,16 +584,18 @@ header
     justify-content: center
     align-items: center
     .hexagon
-      background-color: #404040
+      background-color: pink
       display: none
       img
         height: 100%
+      img, .websocket-chat
         transition: transform .5s
     .hexagon:hover
-      img
+      img, .websocket-chat
         transform: scale(1.2)
     .control
       display: flex
+      z-index: 1
       img
         height: 25%
       .colorer
@@ -630,54 +625,49 @@ header
       animation: hex-one .5s ease-in forwards 2.5s
     @keyframes hex-one
       to
-        transform: translate(105%, 0)
+        transform: translate(-157.5%, -75% - (2.5% * 1.732))
     .hexagon:nth-child(2)
       animation: hex-two .5s ease-in forwards 2.5s
     @keyframes hex-two
       to
-        transform: translate(157.5%, 75% + (2.5% * 1.732))
+        transform: translate(-52.5%, -75% - (2.5% * 1.732))
     .hexagon:nth-child(3)
       animation: hex-three .5s ease-in forwards 2.5s
     @keyframes hex-three
       to
-        transform: translate(-105%, 0)
+        transform: translate(52.5%, -75% - (2.5% * 1.732))
     .hexagon:nth-child(4)
       animation: hex-four .5s ease-in forwards 2.5s
     @keyframes hex-four
       to
-        transform: translate(-52.5%, 75% + (2.5% * 1.732))
+        transform: translate(-105%, 0)
     .hexagon:nth-child(5)
       animation: hex-five .5s ease-in forwards 2.5s
     @keyframes hex-five
       to
-        transform: translate(52.5%, 75% + (2.5% * 1.732))
+        transform: translate(105%, 0)
     .hexagon:nth-child(6)
       animation: hex-six .5s ease-in forwards 2.5s
     @keyframes hex-six
       to
-        transform: translate(-52.5%, -75% - (2.5% * 1.732))
+        transform: translate(-52.5%, 75% + (2.5% * 1.732))
     .hexagon:nth-child(7)
       animation: hex-seven .5s ease-in forwards 2.5s
     @keyframes hex-seven
       to
-        transform: translate(52.5%, -75% - (2.5% * 1.732))
+        transform: translate(52.5%, 75% + (2.5% * 1.732))
     .hexagon:nth-child(8)
       animation: hex-eight .5s ease-in forwards 2.5s
     @keyframes hex-eight
       to
-        transform: translate(-157.5%, -75% - (2.5% * 1.732))
-    .hexagon:nth-child(10)
-      animation: hex-ten .5s ease-in forwards 2.5s
-    @keyframes hex-ten
-      to
-        transform: translate(-157.5%, 75% + (2.5% * 1.732))
-    .hexagon:nth-child(11)
-      animation: hex-eleven .5s ease-in forwards 2.5s
-    @keyframes hex-eleven
-      to
-        transform: translate(157.5%, -75% - (2.5% * 1.732))
+        transform: translate(157.5%, 75% + (2.5% * 1.732))
     .skin
       background-color: #ecbcb4
+      width: 100%
+      height: 100%
+      display: flex
+      justify-content: center
+      align-items: center
     .eye
       position: absolute
       display: flex
@@ -702,11 +692,11 @@ header
         transform: rotate(-45deg) translate(0, 0)
         box-shadow: inset 0 0 10px #000
         border-radius: 50%
-        background-color: #34558b
         animation: eye-to-start 2.5s ease-in
         display: flex
         justify-content: center
         align-items: center
+        background: radial-gradient(#6ca580, #34558b)
         .black
           width: 70%
           height: 70%
@@ -726,8 +716,7 @@ header
       background-color: #afafaf
       border-radius: 50%
       margin: 0.25vw
-    .page:nth-child(1)
-      background-color: #fff
+      transition: all 1s
 
 @media (max-width: 1279px)
   .filler3, .filler2, .monty-hall
@@ -829,8 +818,11 @@ header
     grid-template-columns: repeat(1, 1fr)
     height: auto
     width: 100%
+  .works-desk
+    display: none
   .websocket-chat svg
     max-height: (100vh / 15) !important
+    height: auto !important
     width: auto !important
   .websocket
     max-width: (100vw / 2) !important
