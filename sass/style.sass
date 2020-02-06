@@ -138,6 +138,7 @@ header
     color: #fff
     height: 5vh
     display: flex
+    flex-direction: column
     align-items: center
     width: 30vw
     .burger-label, .burger-stick
@@ -175,9 +176,46 @@ header
         font-family: $font
         font-size: 1.25rem
         transition: .2s border, padding
+        height: 2vw
+        cursor: pointer
       li:hover
         border-bottom: #fff solid 0.15vw
         padding: 0 0 .15vw
+.popup-wrap
+  height: 50%
+  width: 100%
+  display: flex
+  justify-content: center
+  align-items: center
+  transition: opacity, transform .5s
+  opacity: 0
+  transform: translate(35vw, 0)
+  .popup
+    height: 2vw
+    width: 30vw
+    display: flex
+    align-items: center
+    justify-content: space-between
+    margin-top: 4vw
+    .wrapper-icons
+      display: flex
+      justify-content: space-between
+      width: 20vw
+      a
+        color: #fff
+        font-weight: 400
+        height: 2vw
+        text-decoration: none
+        display: flex
+        align-items: center
+      a img
+        height: 100%
+#popup-control
+  display: none
+#popup-control:checked ~ .popup-wrap
+  opacity: 1
+  transform: translate(0, 0)
+
 
 .offer
   position: absolute
