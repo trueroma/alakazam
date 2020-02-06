@@ -24,6 +24,46 @@ const cases = {
   5: ['секунда','секунды','секунд']
 }
 
+const hexElDescription = {
+  0: {
+    0: [
+      'Описание сути работы из портфолио',
+      'Какие инструменты были использованы',
+      'Ссылки на гитхаб и на сам сайтец'
+    ],
+    1: '',
+    2: '',
+    3: '',
+    4: '',
+    5: '',
+    6: '',
+    7: '',
+    8: '',
+  },
+  1: {
+    0: '',
+    1: '',
+    2: '',
+    3: '',
+    4: '',
+    5: '',
+    6: '',
+    7: '',
+    8: '',
+  },
+  2: {
+    0: '',
+    1: '',
+    2: '',
+    3: '',
+    4: '',
+    5: '',
+    6: '',
+    7: '',
+    8: '',
+  },
+}
+
 // should've put it to an external file for experience count
 const countStamp = () => Math.floor(Date.now() / 1000) - experienceStart;
 const figuresChecker = (el, last, teen, i) => {
@@ -230,3 +270,52 @@ setInterval(() => counter.title = countToHumanFormat(), 1500);
 for (let i = 0; i < control.length; i++) control[i].addEventListener('click', switcher);
 controlRight.addEventListener('click', switcherRight);
 controlLeft.addEventListener('click', switcherLeft);
+for (let i = 0; i < hex.length; i++) hex[i].addEventListener('click', () => {
+  if (currentPage === 0 && i === 8) return;
+
+  hex[i].style = `display: flex; transform: scale(2) translate(-75%, 0); z-index: 3`;
+
+  let oldLayout = document.querySelector('.about-hex-layout');
+  if (oldLayout) oldLayout.parentNode.removeChild(oldLayout);
+
+  let aboutHexLayout = document.createElement('div');
+  aboutHexLayout.className = 'about-hex-layout';
+
+  let shadower = document.createElement('div');
+  shadower.className = 'shadower';
+
+  let closeSign = document.createElement('div');
+  closeSign.className = 'close-sign';
+  let p = document.createElement('p');
+  p.innerHTML = '+';
+
+  let fullDescriptionWrapper = document.createElement('div');
+  fullDescriptionWrapper.className = 'full-description-wrapper';
+
+  let fullDescriptionText = document.createElement('p');
+  fullDescriptionText.className = 'full-description-text';
+  fullDescriptionText.innerHTML = hexElDescription[currentPage][i][0];
+
+  let fullDescriptionTools = document.createElement('div');
+  fullDescriptionTools.className = 'full-description-tools';
+  fullDescriptionTools.innerHTML = hexElDescription[currentPage][i][1];
+
+  let fullDescriptionLinks = document.createElement('div');
+  fullDescriptionLinks.className = 'full-description-links';
+  fullDescriptionLinks.innerHTML = hexElDescription[currentPage][i][2];
+
+  sections[2].append(aboutHexLayout);
+  aboutHexLayout.append(shadower);
+  aboutHexLayout.append(closeSign);
+  closeSign.append(p);
+  aboutHexLayout.append(fullDescriptionWrapper);
+  fullDescriptionWrapper.append(fullDescriptionText);
+  fullDescriptionWrapper.append(fullDescriptionTools);
+  fullDescriptionWrapper.append(fullDescriptionLinks);
+
+  closeSign.addEventListener('click', () => {
+    hex[i].style = `display: flex; z-index: 3`;
+    setTimeout(() => hex[i].style = `display: flex`, 500);
+    aboutHexLayout.parentNode.removeChild(aboutHexLayout);
+  });
+});

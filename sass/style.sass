@@ -412,7 +412,7 @@ header
   transform: rotateY(-85deg)
   transform-style: preserve-3d
   // background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)
-  border-radius: 50%
+  // border-radius: 50%
   .item
     transform: rotateY(90deg)
     img
@@ -584,8 +584,11 @@ header
     justify-content: center
     align-items: center
     .hexagon
+      border: none
       background-color: pink
       display: none
+      transition: transform .5s
+      z-index: 2
       img
         height: 100%
       img, .websocket-chat
@@ -610,6 +613,7 @@ header
       transform: translate(210%, 0)
     .control-left
       transform: translate(-210%, 0)
+
     .hexagon, .control
       overflow: hidden
       width: 20vw * .866
@@ -622,45 +626,103 @@ header
       justify-content: center
       align-items: center
     .hexagon:nth-child(1)
-      animation: hex-one .5s ease-in forwards 2.5s
+      transform: translate(-157.5%, -75% - (2.5% * 1.732))
+      animation: hex-one 3s ease-in
     @keyframes hex-one
-      to
+      0%
+        transform: translate(0)
+      80%
+        transform: translate(0)
+      100%
         transform: translate(-157.5%, -75% - (2.5% * 1.732))
+
     .hexagon:nth-child(2)
-      animation: hex-two .5s ease-in forwards 2.5s
+      transform: translate(-52.5%, -75% - (2.5% * 1.732))
+      animation: hex-two 3s ease-in
     @keyframes hex-two
-      to
+      0%
+        transform: translate(0)
+      80%
+        transform: translate(0)
+      100%
         transform: translate(-52.5%, -75% - (2.5% * 1.732))
+
     .hexagon:nth-child(3)
-      animation: hex-three .5s ease-in forwards 2.5s
+      transform: translate(52.5%, -75% - (2.5% * 1.732))
+      animation: hex-three 3s ease-in
     @keyframes hex-three
-      to
+      0%
+        transform: translate(0)
+      80%
+        transform: translate(0)
+      100%
         transform: translate(52.5%, -75% - (2.5% * 1.732))
+
     .hexagon:nth-child(4)
-      animation: hex-four .5s ease-in forwards 2.5s
+      transform: translate(-105%, 0)
+      animation: hex-four 3s ease-in
     @keyframes hex-four
-      to
+      0%
+        transform: translate(0)
+      80%
+        transform: translate(0)
+      100%
         transform: translate(-105%, 0)
+
     .hexagon:nth-child(5)
-      animation: hex-five .5s ease-in forwards 2.5s
+      transform: translate(105%, 0)
+      animation: hex-five 3s ease-in
     @keyframes hex-five
-      to
+      0%
+        transform: translate(0)
+      80%
+        transform: translate(0)
+      100%
         transform: translate(105%, 0)
+
     .hexagon:nth-child(6)
-      animation: hex-six .5s ease-in forwards 2.5s
+      transform: translate(-52.5%, 75% + (2.5% * 1.732))
+      animation: hex-six 3s ease-in
     @keyframes hex-six
-      to
+      0%
+        transform: translate(0)
+      80%
+        transform: translate(0)
+      100%
         transform: translate(-52.5%, 75% + (2.5% * 1.732))
+
     .hexagon:nth-child(7)
-      animation: hex-seven .5s ease-in forwards 2.5s
+      transform: translate(52.5%, 75% + (2.5% * 1.732))
+      animation: hex-seven 3s ease-in
     @keyframes hex-seven
-      to
+      0%
+        transform: translate(0)
+      80%
+        transform: translate(0)
+      100%
         transform: translate(52.5%, 75% + (2.5% * 1.732))
+
     .hexagon:nth-child(8)
-      animation: hex-eight .5s ease-in forwards 2.5s
+      transform: translate(157.5%, 75% + (2.5% * 1.732))
+      animation: hex-eight 3s ease-in
     @keyframes hex-eight
-      to
+      0%
+        transform: translate(0)
+      80%
+        transform: translate(0)
+      100%
         transform: translate(157.5%, 75% + (2.5% * 1.732))
+
+    .hexagon:nth-child(9)
+      animation: hex-eye 3s ease-in
+    @keyframes hex-eye
+      0%
+        transform: scale(2)
+      80%
+        transform: scale(2)
+      100%
+        transform: scale(1)
+
     .skin
       background-color: #ecbcb4
       width: 100%
@@ -716,7 +778,55 @@ header
       background-color: #afafaf
       border-radius: 50%
       margin: 0.25vw
-      transition: all 1s
+      transition: all .5s
+.about-hex-layout, .shadower
+  position: absolute
+  width: 100vw
+  height: 100vh
+.about-hex-layout
+  left: 0
+  z-index: 2
+.shadower
+  background-color: #000
+  opacity: .7
+.close-sign
+  position: absolute
+  top: 15%
+  right: 15%
+  color: #fff
+  transform-origin: 50% 50%
+  height: 8vw
+  width: 8vw
+  display: flex
+  justify-content: center
+  align-items: center
+  cursor: pointer
+  p
+    transform: rotate(45deg)
+    font-size: 5rem
+    font-weight: 700
+.full-description-wrapper
+  position: absolute
+  top: 30%
+  left: 45%
+  color: #fff
+  width: 35vw
+  font-family: #font
+  font-size: 1.5rem
+  text-align: center
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  .full-description-tools, .full-description-text, .full-description-links
+    margin: 2vh 0
+
+//   .sideDescription
+//     width: 25vw
+//     height: 100vh
+//     position: absolute
+//     left: 0
+//     background-color: #444
+//     z-index: 3
 
 @media (max-width: 1279px)
   .filler3, .filler2, .monty-hall
@@ -812,6 +922,8 @@ header
         font-size: 3.75rem
       .counter-wrapper
         margin-bottom: 5vh
+  .floating-icons-wrapper
+    display: none
 
   section .works-mob
     display: grid

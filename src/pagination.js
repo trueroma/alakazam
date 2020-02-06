@@ -80,7 +80,7 @@ const hexContents = {
                 </div>
             </div>
         </div>
-        `,
+    `,
   },
   1: {
     0: `<img src="/assets/stub.png" alt="stub">`,
@@ -113,11 +113,17 @@ function switchAction() {
   pageIndicators[currentPage].style = 'background-color: #fff; transform: scale(1.2)';
 
   for (let i = 0; i < hex.length; i++) {
-    while (hex[i].children.length) hex[i].removeChild(hex[i].lastChild);
+    while (hex[i].children.length) {
+      hex[i].removeChild(hex[i].lastChild);
+    }
     hex[i].innerHTML = hexContents[currentPage][i];
   }
 
-  if (currentPage === 0) document.body.addEventListener('mousemove', mouseTracker);
+  if (eyeBeingTracked && currentPage !== 0) {
+    eyeBeingTracked = false;
+    document.body.removeEventListener('mousemove', mouseTracker);
+  }
+  if (currentPage === 0 && !eyeBeingTracked) setTimeout(() => document.body.addEventListener('mousemove', mouseTracker), 3000);
 }
 
 function switcher() {
@@ -137,3 +143,8 @@ function switcherLeft() {
   right = false;
   switchAction();
 }
+
+for (let i = 0; i < pageIndicators.length; i++) pageIndicators[i].addEventListener('click', () => {
+  currentPage = i;
+  switchAction();
+});
