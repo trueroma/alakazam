@@ -14,6 +14,7 @@ const scrollerToPortfolio = document.querySelector('.scroller-to-portfolio');
 const bluePositionNotifier = document.querySelectorAll('.bl-scroll-pointer');
 const redPositionNotifier = document.querySelectorAll('.rd-scroll-pointer');
 const counter = document.querySelector('.counter');
+const sendContactForm = document.querySelector('.contact');
 
 const cases = {
   0: ['год','года','лет'],
@@ -266,6 +267,14 @@ redPositionNotifier[scrollPosition].style.transform = `translateX(-50%)`;
 
 setInterval(() => counter.innerHTML = countStamp(), 1000);
 setInterval(() => counter.title = countToHumanFormat(), 1500);
+
+sendContactForm.addEventListener('submit', (ev) => {
+  ev.preventDefault();
+  let name = ev.target[0].value;
+  let phone = ev.target[1].value;
+  console.log('Имя:', name);
+  console.log('Телефон:', phone);
+});
 
 for (let i = 0; i < control.length; i++) control[i].addEventListener('click', switcher);
 controlRight.addEventListener('click', switcherRight);
