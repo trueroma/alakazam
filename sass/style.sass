@@ -199,7 +199,6 @@ header
     transition: all .5s
     opacity: 0
     transform: translate(35vw, 0)
-    // margin-top: 4vw
     .wrapper-icons
       display: flex
       justify-content: space-between
@@ -329,9 +328,12 @@ header
         display: flex
         justify-content: center
         align-items: center
-      a, img
         max-height: 3vw
+      a, img
+        height: 100%
         position: absolute
+      .text-img
+        max-height: 1vw !important
 .esSixOpacityCh, .babelOpacityCh
   animation: ranger 12s infinite linear
 .cssOpacityCh, .gitOpacityCh
@@ -365,7 +367,7 @@ header
 .item:hover .itemOpacityMax
   display: flex
 .item:hover .stitchOpacityCh
-  height: 0
+  height: 0 !important
 .tilter
   position: absolute
   transform: rotate(45deg)
