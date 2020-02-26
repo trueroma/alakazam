@@ -333,7 +333,7 @@ header
         height: 100%
         position: absolute
       .text-img
-        max-height: 1vw !important
+        max-height: 1vw
 .esSixOpacityCh, .babelOpacityCh
   animation: ranger 12s infinite linear
 .cssOpacityCh, .gitOpacityCh
@@ -780,13 +780,15 @@ header
       justify-content: space-around
       align-items: center
       padding: 25% 0
+      font-family: $font
       input
-        padding: .1vw
+        padding: .2vw .5vw
         font-size: 1rem
         outline: none
       button
-        height: 2vw
-        padding: .1vw .5vw
+        font-size: 1rem
+        height: 3vw
+        padding: .1vw 1vw
         outline: none
         border: none
         background-color: #000
@@ -993,6 +995,32 @@ header
         font-size: 3.75rem
       .counter-wrapper
         margin-bottom: 5vh
+  .floating-icons-wrapper
+    min-height: 100vw
+    display: flex
+    justify-content: center
+    align-items: center
+    .float-wrapper
+      padding: 0 8vw
+      grid-template-columns: auto !important
+      grid-template-rows: 8vw 15vw 19vw 19vw 15vw 8vw
+      height: auto !important
+      .wrapper:nth-child(1)
+        padding: 0 45vw 0 0
+      .wrapper:nth-child(2)
+        padding: 0 30vw 0 0
+      .wrapper:nth-child(3)
+        padding: 0 15vw 0 0
+      .wrapper:nth-child(4)
+        padding: 0 0 0 15vw
+      .wrapper:nth-child(5)
+        padding: 0 0 0 30vw
+      .wrapper:nth-child(6)
+        padding: 0 0 0 45vw
+      img, a
+        height: 4vh !important
+      .text-img
+        max-height: 1vh !important
   .made-with-css-wrapper
     display: flex
     height: calc(8vw + 2vh)
