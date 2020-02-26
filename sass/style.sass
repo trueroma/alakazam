@@ -176,7 +176,7 @@ header
         font-family: $font
         font-size: 1.25rem
         transition: .2s border, padding
-        height: 2vw
+        height: 1.8vw
         cursor: pointer
         label
           cursor: pointer
@@ -184,19 +184,21 @@ header
         border-bottom: #fff solid 0.15vw
         padding: 0 0 .15vw
 .popup-wrap
-  height: 50%
-  width: 100%
+  height: 3vw
+  width: 30vw
   display: flex
   justify-content: center
   align-items: center
   overflow: hidden
+  position: absolute
+  margin-top: 5vh
   .popup
-    height: 2vw
+    height: 3vw
     width: 30vw
     display: flex
     align-items: center
     justify-content: space-between
-    transition: all .5s
+    transition: all .2s
     opacity: 0
     transform: translate(35vw, 0)
     .wrapper-icons
@@ -206,12 +208,14 @@ header
       a
         color: #fff
         font-weight: 400
-        height: 2vw
+        height: 2.2vw
         text-decoration: none
         display: flex
         align-items: center
       a img
         height: 100%
+    .phone
+      font-family: $font
 #popup-control
   display: none
 #popup-control:checked ~ .popup-wrap .popup
@@ -891,14 +895,6 @@ header
   .full-description-tools, .full-description-text, .full-description-links
     margin: 2vh 0
 
-//   .sideDescription
-//     width: 25vw
-//     height: 100vh
-//     position: absolute
-//     left: 0
-//     background-color: #444
-//     z-index: 3
-
 @media (max-width: 1279px)
   .filler3, .filler2, .monty-hall
     display: none
@@ -959,6 +955,34 @@ header
         li:hover
           border: none
           padding: 0
+      .popup-wrap
+        position: static
+        margin: 0 auto
+        height: 0
+        width: 80vw
+        transition: height, margin .2s
+        .popup
+          height: 28vw
+          width: 100%
+          transform: translate(0, -24vw)
+          flex-direction: column
+          justify-content: space-between
+          .phone, .wrapper-icons
+            height: 12vw
+            width: 100%
+            align-items: center
+          .phone
+            font-size: 8rem
+            display: flex
+            justify-content: center
+          .wrapper-icons a
+            height: 10vw
+  #popup-control:checked ~ .popup-wrap
+    margin: 5vh auto 0
+    height: 28vw
+    .popup
+      opacity: 1
+      transform: translate(0, 0)
   header nav .burger-label, header nav .burger-stick
     display: flex
   .offer
@@ -1006,17 +1030,17 @@ header
       grid-template-rows: 8vw 15vw 19vw 19vw 15vw 8vw
       height: auto !important
       .wrapper:nth-child(1)
-        padding: 0 45vw 0 0
+        padding: 0 70vw 0 0
       .wrapper:nth-child(2)
-        padding: 0 30vw 0 0
+        padding: 0 40vw 0 0
       .wrapper:nth-child(3)
-        padding: 0 15vw 0 0
+        padding: 0 10vw 0 0
       .wrapper:nth-child(4)
-        padding: 0 0 0 15vw
+        padding: 0 0 0 10vw
       .wrapper:nth-child(5)
-        padding: 0 0 0 30vw
+        padding: 0 0 0 40vw
       .wrapper:nth-child(6)
-        padding: 0 0 0 45vw
+        padding: 0 0 0 70vw
       img, a
         height: 4vh !important
       .text-img
