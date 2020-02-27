@@ -118,7 +118,6 @@ header
       transform: rotate(30deg)
     svg:nth-child(3n+2)
       transform: rotate(15deg) translate3d(-20%,20%,0)
-      // animation: foot-appear 16s infinite
       display: none
     svg:nth-child(3n) 
       transform: scale(-1, 1)
@@ -218,9 +217,10 @@ header
       font-family: $font
 #popup-control
   display: none
-#popup-control:checked ~ .popup-wrap .popup
-  opacity: 1
-  transform: translate(0, 0)
+#popup-control:checked ~ .popup-wrap
+  .popup
+    opacity: 1
+    transform: translate(0, 0)
 
 
 .offer
@@ -1042,9 +1042,9 @@ header
       .wrapper:nth-child(6)
         padding: 0 0 0 70vw
       img, a
-        height: 4vh !important
+        height: 8vw !important
       .text-img
-        max-height: 1vh !important
+        max-height: 2vw !important
   .made-with-css-wrapper
     display: flex
     height: calc(8vw + 2vh)
@@ -1064,16 +1064,16 @@ header
   .chat
     max-width: (100vw / 4.5) !important
 
-@media (max-width: 800px)
+@media (max-width: 800px) and (orientation: portrait)
   header
     .logo
       left: 15vw
       svg
-        min-height: 7.8125vw * 2
+        min-height: 7.8125vw * 1.8
       .bl 
-        left: 0.16741071vw * 2
+        left: 0.16741071vw * 1.8
       .rd 
-        left: -0.16741071vw * 2
+        left: -0.16741071vw * 1.8
     nav
       .burger-label, .burger-stick
         width: 12vw
@@ -1151,6 +1151,29 @@ header
       left: 0
     100% 
       left: 0.16741071vw * 2.2
+
+@media (max-width: 991px) and (orientation: landscape) and (min-aspect-ratio: 16/9)
+  header
+    .popup-wrap
+      .popup
+        height: 18vw !important
+        width: 50vw !important
+        .phone, .wrapper-icons
+          height: 7vw !important
+        .phone
+          font-size: 4rem !important
+        .wrapper-icons a
+          height: 5vw !important
+  section .works-mob
+    div
+      height: 100vh
+      .description-block
+        margin-top: 100vh
+    div:hover
+      .description-block
+        margin-top: 80vh
+  
+  
 @media (max-width: 600px)
   section .works-mob
     div
