@@ -67,6 +67,16 @@ const hexElDescription = {
 
 // should've put it to an external file for experience count
 const countStamp = () => Math.floor(Date.now() / 1000) - experienceStart;
+
+const decorateNumber = n => {
+  const digits = Array.from((+n).toString());
+  const view = [];
+
+  for (let i = 1; digits.length; i++) view.unshift(i % 4 ? digits.pop() : '`');
+
+  return view.join('');
+};
+
 const figuresChecker = (el, last, teen, i) => {
   if (teen || +last === 0 || +last >= 5 && +last <= 9) {
     return ` ${el} ${cases[i][2]}`;
@@ -105,8 +115,11 @@ const countToHumanFormat = () => {
 
   return padezh([years, months, days, hours, minutes, seconds]);
 }
-counter.innerHTML = countStamp();
-counter.title = countToHumanFormat();
+
+const setCounter = () => {
+  counter.innerHTML = decorateNumber(countStamp());
+  counter.title = countToHumanFormat();
+};
 // end of experience count
 
 // start of eye tracking
@@ -265,8 +278,7 @@ window.addEventListener('resize', resizeControl);
 bluePositionNotifier[scrollPosition].style.transform = `translateX(50%)`;
 redPositionNotifier[scrollPosition].style.transform = `translateX(-50%)`;
 
-setInterval(() => counter.innerHTML = countStamp(), 1000);
-setInterval(() => counter.title = countToHumanFormat(), 1500);
+setInterval(setCounter, 1000);
 
 sendContactForm.addEventListener('submit', (ev) => {
   ev.preventDefault();
